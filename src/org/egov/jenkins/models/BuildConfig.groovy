@@ -1,4 +1,4 @@
-package org.egov.jenkins.models
+//package org.egov.jenkins.models
 
 class BuildConfig {
 
