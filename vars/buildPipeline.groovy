@@ -98,7 +98,7 @@ spec:
         node(POD_LABEL) {
 
             def scmVars = checkout scm
-            String REPO_NAME = env.REPO_NAME ? "docker.io/ggakg" : "docker.io/ggakg";         
+            String REPO_NAME = env.REPO_NAME ? env.REPO_NAME : "docker.io/egovio";         
             String GCR_REPO_NAME = "asia.gcr.io/digit-egov";
             def yaml = readYaml file: pipelineParams.configFile;
             List<JobConfig> jobConfigs = ConfigParser.parseConfig(yaml, env);
@@ -182,7 +182,7 @@ spec:
                                     --snapshotMode=time \
                                     --destination=${image} \
                                     --no-push=${noPushImage} \
-                                    --cache-repo=ggakg/cache/cache
+                                    --cache-repo=egovio/cache/cache
                                 """
                                 echo "${image} pushed successfully!"
                                 }                                
