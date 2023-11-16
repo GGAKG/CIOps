@@ -98,7 +98,7 @@ spec:
         node(POD_LABEL) {
 
             def scmVars = checkout scm
-            String REPO_NAME = "docker.io/ggakg";         
+            String REPO_NAME = env.REPO_NAME ? env.REPO_NAME : "docker.io/ggakg";         
             String GCR_REPO_NAME = "asia.gcr.io/digit-egov";
             def yaml = readYaml file: pipelineParams.configFile;
             List<JobConfig> jobConfigs = ConfigParser.parseConfig(yaml, env);
@@ -169,14 +169,20 @@ spec:
                                 }
                                 else{
                                 sh """
-                                    echo \"Attempting to build image,  ${image}\"
-                                    /kaniko/executor --force -f `pwd`/${buildConfig.getDockerFile()} -c `pwd`/${buildConfig.getContext()} \
+                                     echo \"Attempting to build image,  ${image}\"
+                                    /kaniko/executor -f `pwd`/${buildConfig.getDockerFile()} -c `pwd`/${buildConfig.getContext()} \
                                     --build-arg WORK_DIR=${workDir} \
                                     --build-arg token=\$GIT_ACCESS_TOKEN \
+                                    --build-arg nexusUsername=\$NEXUS_USERNAME \
+                                    --build-arg nexusPassword=\$NEXUS_PASSWORD \
+                                    --build-arg ciDbUsername=\$CI_DB_USER \
+                                    --build-arg ciDbpassword=\$CI_DB_PWD \
+                                    --cache=true --cache-dir=/cache \
                                     --single-snapshot=true \
                                     --snapshotMode=time \
                                     --destination=${image} \
                                     --no-push=${noPushImage} \
+                                    --cache-repo=ggakg/cache/cache
                                 """
                                 echo "${image} pushed successfully!"
                                 }                                
