@@ -26,7 +26,7 @@ def call(Map params) {
                             name: jenkins-credentials
                             key: dockerPassword
                       - name: DOCKER_NAMESPACE
-                        value: egovio
+                        value: ggakg
                       - name: DOCKER_GROUP_NAME  
                         value: dev
                     resources:
