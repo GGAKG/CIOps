@@ -173,10 +173,6 @@ spec:
                                     /kaniko/executor --force -f `pwd`/${buildConfig.getDockerFile()} -c `pwd`/${buildConfig.getContext()} \
                                     --build-arg WORK_DIR=${workDir} \
                                     --build-arg token=\$GIT_ACCESS_TOKEN \
-                                    --build-arg nexusUsername=\$NEXUS_USERNAME \
-                                    --build-arg nexusPassword=\$NEXUS_PASSWORD \
-                                    --build-arg ciDbUsername=\$CI_DB_USER \
-                                    --build-arg ciDbpassword=\$CI_DB_PWD \
                                     --cache=true --cache-dir=/cache \
                                     --single-snapshot=true \
                                     --snapshotMode=time \
