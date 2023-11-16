@@ -173,12 +173,10 @@ spec:
                                     /kaniko/executor --force -f `pwd`/${buildConfig.getDockerFile()} -c `pwd`/${buildConfig.getContext()} \
                                     --build-arg WORK_DIR=${workDir} \
                                     --build-arg token=\$GIT_ACCESS_TOKEN \
-                                    --cache=true --cache-dir=/cache \
                                     --single-snapshot=true \
                                     --snapshotMode=time \
                                     --destination=${image} \
                                     --no-push=${noPushImage} \
-                                    --cache-repo=ggakg/cache/cache
                                 """
                                 echo "${image} pushed successfully!"
                                 }                                
