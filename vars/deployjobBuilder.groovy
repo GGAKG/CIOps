@@ -194,7 +194,7 @@ def call(Map params) {
             definition {
               cps {
                   script('''library 'ci-libs'
-                              selfDeployer(repo:'git@github.com:egovernments/DIGIT-DevOps.git', branch: 'singleinstance', helmDir: 'deploy-as-code/helm')''')
+                              selfDeployer(repo:'git@github.com:beehyv/DIGIT-DevOps-k3d.git', branch: 'kubernetes-1.22-changes', helmDir: 'config-as-code/helm')''')
                   sandbox() 
                 }
             }
